@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View, Pressable, Text, TextInput } from "react-native";
 
-export default function Input({ typeOfInput }) {
-  const [text, onChangeText] = useState("");
+export default function Input({ typeOfInput, value, onChange }) {
   if (typeOfInput == "email") {
     return (
       <View style={styles.inputContainer}>
@@ -13,8 +12,8 @@ export default function Input({ typeOfInput }) {
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
-          value={text}
-          onChange={onChangeText}
+          value={value}
+          onChange={onChange}
         />
       </View>
     );
@@ -27,8 +26,8 @@ export default function Input({ typeOfInput }) {
           placeholder="Enter your password"
           secureTextEntry={true}
           autoCapitalize="none"
-          value={text}
-          onChange={onChangeText}
+          value={value}
+          onChange={onChange}
         />
       </View>
     );
@@ -39,8 +38,8 @@ export default function Input({ typeOfInput }) {
         <TextInput
           style={styles.inputStyle}
           placeholder="Alice Rodrigese"
-          value={text}
-          onChange={onChangeText}
+          value={value}
+          onChange={onChange}
         />
       </View>
     );

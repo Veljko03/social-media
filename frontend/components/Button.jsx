@@ -1,12 +1,10 @@
+import { Link } from "expo-router";
 import { StyleSheet, View, Pressable, Text } from "react-native";
 
-export default function Button({ label }) {
+export default function Button({ label, onPress }) {
   return (
     <View style={styles.buttonContainer}>
-      <Pressable
-        style={styles.button}
-        onPress={() => alert("You pressed a button.")}
-      >
+      <Pressable style={styles.button} onPress={onPress}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>
@@ -32,7 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   buttonLabel: {
-    color: "#fff",
+    color: "black",
     fontSize: 16,
   },
 });

@@ -1,10 +1,27 @@
-import { useRoute } from "@react-navigation/native";
-import { Link } from "expo-router";
+import { Link, useNavigation, useRouter } from "expo-router";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { useState } from "react";
 export default function LogScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const route = useRouter();
+
+  const handleLogIn = () => {
+    if (email.length === 0 || password.length === 0) {
+      alert("Error", "Please fill in all fields.");
+      return;
+    }
+
+    if (password.length < 6) {
+      alert("Error", "Password must be at least 6 characters long.");
+      return;
+    }
+
+    route.push("/");
+  };
   return (
     <View style={styles.container}>
       <View style={styles.title}>
@@ -15,10 +32,14 @@ export default function LogScreen() {
           <Text style={styles.sec1Name}>Login</Text>
         </View>
         <View style={styles.section2}>
-          <Input typeOfInput={"name"} />
-          <Input typeOfInput={"password"} />
+          <Input typeOfInput={"email"} value={email} onChange={setEmail} />
+          <Input
+            typeOfInput={"password"}
+            value={password}
+            onChange={setPassword}
+          />
 
-          <Button label={"Log in"} />
+          <Button label={"Log in"} onPress={handleLogIn} />
         </View>
         <View style={styles.section3}>
           <Text style={styles.text}>Don't have account?</Text>
@@ -43,7 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     marginTop: "auto",
-    marginBottom: 80,
+    marginBottom: 130,
     gap: 10,
   },
   sec1Name: {
