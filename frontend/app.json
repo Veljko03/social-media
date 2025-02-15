@@ -9,13 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.frontend"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "permissions": ["android.permission.ACTIVITY_RECOGNITION"],
       "package": "com.anonymous.frontend"
     },
     "web": {
@@ -25,18 +27,24 @@
     },
     "plugins": [
       "expo-router",
+      ["expo-splash-screen", {}],
       [
-        "expo-splash-screen",
+        "expo-sensors",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "motionPermission": "Allow $(PRODUCT_NAME) to access your device motion"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "4fa07dde-1dd0-48a6-8390-9f66a1968286"
+      }
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Link } from "expo-router";
+import { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 
 export default function AboutScreen() {

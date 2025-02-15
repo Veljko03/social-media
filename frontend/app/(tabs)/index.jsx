@@ -7,9 +7,14 @@ export default function App() {
   const [subscription, setSubscription] = useState(null);
   const [steps, setSteps] = useState(0);
   const [lastMagnitude, setLastMagnitude] = useState(null);
+  const [distance, setDistance] = useState(0);
+  const [calories, setCalories] = useState(0);
+
   const [threshold] = useState(1.3);
   const lastStepTime = useRef(0);
-  const debounceTime = 300;
+  const debounceTime = 350;
+  const avgStepLength = 0.74;
+  const caloriesPerStep80kgW180H = 0.04542;
 
   const _subscribe = () => {
     Accelerometer.setUpdateInterval(16);
@@ -39,6 +44,11 @@ export default function App() {
       if (now - lastStepTime.current > debounceTime) {
         setSteps((prevSteps) => prevSteps + 1);
         lastStepTime.current = now;
+        let newDistance = steps * avgStepLength;
+        const result = newDistance.toFixed();
+        const kcal = (result * caloriesPerStep80kgW180H).toFixed();
+        setCalories(kcal);
+        setDistance(result);
       }
     }
 
@@ -48,6 +58,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Koraci: {steps}</Text>
+      <Text style={styles.text}>Distance: {distance}m</Text>
+      <Text style={styles.text}>Caloris: {calories}</Text>
     </View>
   );
 }
